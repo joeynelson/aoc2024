@@ -61,6 +61,20 @@ function find_cheats2(m, loc, paths)
     return cheats
 end
 
+function find_cheats3(m)
+    locs = findall(m .>= 90)
+
+    count = 0
+    for s in locs
+        for t in locs
+            if m[s] + m[t] >= 50 && sum(abs.(Tuple(s.I .- t.I))) <= 20
+                count += 1
+            end
+        end
+    end
+    return count
+end
+
 function make_cheat_maps(m, cheat)
     m2 = copy(m)
     loc, dst, delta =  cheat
@@ -68,3 +82,4 @@ function make_cheat_maps(m, cheat)
     m2[loc] = 200 
     return m2
 end
+
